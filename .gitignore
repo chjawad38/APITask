@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BeerCollectionApi/bin/Debug/net8.0
+/BeerCollectionApi/obj
+/.vs/APITask/CopilotIndices/17.12.38.29086
