@@ -95,9 +95,58 @@ public class BeerService
         };
         _context.BeerRatings.Add(rating);
 
-        beer.AverageRating = Math.Round(beer.Ratings.Average(r => r.Score), 1);
+        beer.RatingCount = beer.Ratings.Count + 1;
+        beer.AverageRating = Math.Round(
+            ((beer.AverageRating ?? 0) * (beer.RatingCount - 1) + ratingDto.Score) / beer.RatingCount,
+            1
+        );
 
         await _context.SaveChangesAsync();
         return true;
     }
+
+
+    public async Task<BeerDetailedDTO?> GetBeerDetailsById(int id)
+    {
+        var beer = await _context.Beers
+            .Include(b => b.Ratings)
+            .FirstOrDefaultAsync(b => b.Id == id);
+
+        if (beer == null) return null;
+
+        return new BeerDetailedDTO
+        {
+            Id = beer.Id,
+            Name = beer.Name,
+            Type = beer.Type.ToString(),
+            AverageRating = beer.AverageRating,
+            RatingCount = beer.RatingCount,
+            Ratings = beer.Ratings.Select(r => new RatingDetailDTO
+            {
+                Score = r.Score,
+                RatedOn = r.RatedOn
+            }).ToList()
+        };
+    }
+
+    public async Task<IEnumerable<BeerDetailedDTO>> GetAllBeersWithRatings()
+    {
+        return await _context.Beers
+            .Include(b => b.Ratings)
+            .Select(b => new BeerDetailedDTO
+            {
+                Id = b.Id,
+                Name = b.Name,
+                Type = b.Type.ToString(),
+                AverageRating = b.AverageRating,
+                RatingCount = b.RatingCount,
+                Ratings = b.Ratings.Select(r => new RatingDetailDTO
+                {
+                    Score = r.Score,
+                    RatedOn = r.RatedOn
+                }).ToList()
+            })
+            .ToListAsync();
+    }
+
 }

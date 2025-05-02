@@ -16,25 +16,28 @@ public static class SeedData
         }
 
         context.Beers.AddRange(
-            new Beer
-            {
-                Name = "Pale Ale Classic",
-                Type = BeerType.PaleAle,
-                AverageRating = 4.2
-            },
-            new Beer
-            {
-                Name = "Stout Master",
-                Type = BeerType.Stout,
-                AverageRating = 4.5
-            },
-            new Beer
-            {
-                Name = "IPA Fresh",
-                Type = BeerType.IPA,
-                AverageRating = 3.8
-            }
-        );
+    new Beer
+    {
+        Name = "Pale Ale Classic",
+        Type = BeerType.PaleAle,
+        AverageRating = 4.2,
+        RatingCount = 5
+    },
+    new Beer
+    {
+        Name = "Stout Master",
+        Type = BeerType.Stout,
+        AverageRating = 4.5,
+        RatingCount = 3
+    },
+    new Beer
+    {
+        Name = "IPA Fresh",
+        Type = BeerType.IPA,
+        AverageRating = 3.8,
+        RatingCount = 7
+    }
+);
 
 
 

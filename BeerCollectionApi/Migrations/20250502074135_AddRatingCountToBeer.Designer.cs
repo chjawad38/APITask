@@ -4,6 +4,7 @@ using BeerCollectionAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeerCollectionApi.Migrations
 {
     [DbContext(typeof(BeerCollectionContext))]
-    partial class BeerCollectionContextModelSnapshot : ModelSnapshot
+    [Migration("20250502074135_AddRatingCountToBeer")]
+    partial class AddRatingCountToBeer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

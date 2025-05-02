@@ -10,6 +10,7 @@ public class Beer
     public BeerType Type { get; set; }
     public ICollection<BeerRating> Ratings { get; set; } = new List<BeerRating>();
     public double? AverageRating { get; set; }
+    public int RatingCount { get; set; } // Add this back
 }
 
 public enum BeerType

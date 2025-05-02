@@ -68,4 +68,27 @@ public class BeersController : ControllerBase
 
         return NoContent();
     }
+
+
+    // GET: api/Beers/details/all
+    [HttpGet("details/all")]
+    public async Task<ActionResult<IEnumerable<BeerDetailedDTO>>> GetAllBeersWithRatings()
+    {
+        return Ok(await _beerService.GetAllBeersWithRatings());
+    }
+
+    // GET: api/Beers/details/5
+    [HttpGet("details/{id}")]
+    public async Task<ActionResult<BeerDetailedDTO>> GetBeerDetails(int id)
+    {
+        var beer = await _beerService.GetBeerDetailsById(id);
+
+        if (beer == null)
+        {
+            return NotFound();
+        }
+
+        return beer;
+    }
+
 }
